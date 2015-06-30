@@ -1,0 +1,13 @@
+Source: cli-installer-antix
+Section: antiX
+Priority: optional
+Maintainer: anticapitalista <antiX@operamail.com>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.4
+Homepage: http://antix.mepis.org
+
+Package: cli-installer-antix
+Architecture: all 
+Replaces: cli-installer-core-antix, cli-installer-base-antix, cli-installer-full-antix 
+Depends: bash, rsync, squashfs-tools, genisoimage  
+Description: Script to install antiX to hard drive.

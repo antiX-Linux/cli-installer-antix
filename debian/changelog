@@ -1,0 +1,239 @@
+cli-installer-antix (3.7) unstable; urgency=low
+
+  * Use live-to-install script
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 28 Jun 2015 14:43:00 +0200
+
+
+cli-installer-antix (3.6) unstable; urgency=low
+
+  * Various changes for antiX-15
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 01 Jun 2015 19:56:00 +0200
+
+
+cli-installer-antix (3.5) unstable; urgency=low
+
+  * Removed update-initramfs from rc.local.install
+  * Removed rc.local.live
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 12 Apr 2015 20:31:00 +0200
+
+
+cli-installer-antix (3.4) unstable; urgency=low
+
+  * Added update-initramfs to rc.local.install
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 03 Apr 2015 19:53:00 +0200
+
+
+cli-installer-antix (3.3) unstable; urgency=low
+
+  * Added rc.local.live and rc.local.install
+  * Changed code for net-install
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 25 Jan 2015 00:54:00 +0200
+
+
+cli-installer-antix (3.2) unstable; urgency=low
+
+  * Added apt-get -y clean to remove debs.
+  * Added extra information.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 19 Dec 2014 16:48:00 +0200
+
+
+cli-installer-antix (3.1) unstable; urgency=low
+
+  * mount -o (mount -t fails for some reason)
+  * added code to check and install grub, locales, keyboard-configuration, console-setup, sysv-rc-conf for antiX-net
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 17 Dec 2014 18:32:00 +0200
+
+
+cli-installer-antix (3.0.0) unstable; urgency=low
+
+  * Using grub2.
+  * Cleaned up code.
+  * removed rc.local.live
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 11 Mar 2014 16:45:00 +0200
+
+
+cli-installer-antix (2.8.9) unstable; urgency=low
+
+  * Cleaned up code for cli-installer.
+  * added dpkg-reconfigure options.
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 28 Dec 2013 22:55:00 +0200
+
+
+cli-installer-antix (2.8.8) unstable; urgency=low
+
+  * Edited cli-installer file to /user/antix (not X)
+  * added autologin option.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 03 Nov 2013 22:50:00 +0200
+
+
+cli-installer-antix (2.8.7) unstable; urgency=low
+
+  * Edited rc.local.live update-grub-antiX to update-grub-antix
+
+ -- anticapitalista <antiX@operamail.com>  Thu, 31 Oct 2013 16:40:00 +0200
+
+
+cli-installer-antix (2.8.6) unstable; urgency=low
+
+  * Packaged using dpkg-buildpackage.
+  * xz compressed deb.
+
+ -- anticapitalista <antiX@operamail.com>  Thu, 24 Oct 2013 17:45:00 +0200
+
+
+cli-installer-antix (2.8.5) unstable; urgency=low
+
+  * Added removal of antiX-init sym link just to be safe.
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 01 June 2013 17:05:00 +0200
+
+
+cli-installer-antix (2.8.4) unstable; urgency=low
+
+  * xsession-custom for auto usb mounting removed.
+  * using spacefm -d in login_background.sh.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 19 Apr 2013 20:35:00 +0200
+
+
+cli-installer-antix (2.8.3) unstable; urgency=low
+
+  * Added a rename /etc/X11/xorg.conf to xorg.conf.live.
+  * xsession-custom-install replaces xsession-custom (live) for auto usb mounting.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 24 Mar 2013 17:25:00 +0200
+
+
+cli-installer-antix (2.8.2) unstable; urgency=low
+
+  * rc.local.live moved here from live-init.
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 09 February 2013 16:05:00 +0200
+
+
+cli-installer-antix (2.8.1) unstable; urgency=low
+
+  * Added a move the make-fstab udev rules file so it doesn't run on install.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 06 February 2013 18:55:00 +0200
+
+
+cli-installer-antix (2.8) unstable; urgency=low
+
+  * Use can define live username and user password. Default for antiX=demo for both.
+  * Added jfs, xfs, btrfs, reiserfs. ext4 is default.
+
+ -- anticapitalista <antiX@operamail.com>  Thu, 27 December 2012 19:45:00 +0200
+
+
+cli-installer-antix (2.7.1) unstable; urgency=low
+
+  * Fixed errors when running install for core.
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 03 November 2012 23:25:00 +0200
+
+
+cli-installer-antix (2.7.0) unstable; urgency=low
+
+  * Standard script for base, full and core.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 02 November 2012 19:30:00 +0200
+
+
+cli-installer-base-antix (2.6.0) unstable; urgency=low
+
+  * Removed copies from /usr/share/antiX-install.
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 30 October 2012 23:35:00 +0200
+
+
+cli-installer-base-antix (2.5.8) unstable; urgency=low
+
+  * Removed vga=791 from menu.lst.
+  * Removed symlinks to initrd.gz and vmlinuz in boot (not needed?).
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 07 October 2012 14:10:00 +0200
+
+
+cli-installer-base-antix (2.5.7) unstable; urgency=low
+
+  * Fixed ownership bug.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 26 August 2012 15:40:00 +0200
+
+
+cli-installer-base-antix (2.5.6) unstable; urgency=low
+ 
+  * Changed code to wrie grub menu.lst.
+
+ -- anticapitalista <antiX@operamail.com> Wed, 25 July 2012 15:30:00 +0200
+
+
+cli-installer-base-antix (2.5.5) unstable; urgency=low
+ 
+  * Added copyright notice.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 16 July 2012 15:30:00 +0200
+
+
+cli-installer-base-antix (2.5.4) unstable; urgency=low 
+ 
+  * Added line to remove live-init in remastered..
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 14 July 2012 17:35:00 +0200
+
+
+cli-installer-base-antix (2.5.3) unstable; urgency=low 
+ 
+  * Added localisation.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 25 April 2012 17:45:00 +0200
+
+
+cli-installer-base-antix (2.5.2) unstable; urgency=low 
+ 
+  * Minor changes to script name.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 21 March 2012 00:45:00 +0200
+
+
+cli-installer-base-antix (2.5.1) unstable; urgency=low 
+ 
+  * Removed rm /run mkdir /run. No longer needed
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 26 January 2012 22:45:00 +0200
+
+
+cli-installer-base-antix (2.5.0) unstable; urgency=low 
+ 
+  * Added getfs function using blkid to set fs in fstab
+  * Remove live-init-base-antix at end of script using dpkg
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 28 December 2011 15:00:00 +0200
+
+
+cli-installer-base-antix (2.4.0) unstable; urgency=low 
+ 
+  * Added comments.
+  * Changes to /home set up.
+  * Localisation changes.
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 27 December 2011 15:00:00 +0200
+
+
+cli-installer-base-antix (2.2.0) unstable; urgency=low 
+ 
+  * Initial Release.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 20 November 2011 15:30:00 +0200
+

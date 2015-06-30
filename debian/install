@@ -1,0 +1,4 @@
+locale/*               /usr/share/locale
+rc.local.install       /usr/share/antiX
+changelog.gz           /usr/share/doc/cli-installer-antix 
+copyright              /usr/share/doc/cli-installer-antix
