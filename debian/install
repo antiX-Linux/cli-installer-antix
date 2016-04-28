@@ -1,3 +1,2 @@
-cli-installer 		usr/local/bin
-locale/*                usr/share/locale
-rc.local.install        usr/share/antiX
+locale/*	usr/share/locale
+cli-installer	usr/local/bin

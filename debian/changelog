@@ -1,3 +1,10 @@
+cli-installer-antix (3.8) unstable; urgency=low
+
+  * Remove rc.local.install as it is now in installer
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 29 Dec 2015 14:59:00 +0200
+
+
 cli-installer-antix (3.7) unstable; urgency=low
 
   * Use live-to-install script
