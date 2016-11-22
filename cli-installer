@@ -7,7 +7,7 @@ TEXTDOMAINDIR=/usr/share/locale
 TEXTDOMAIN=cli-installer
 
 #Default
-DISTR0=antiX-15
+DISTR0=antiX-16
 LIVEUSER=demo
 
 ##functions
@@ -27,7 +27,7 @@ LIVEUSER=demo
 title() {
 echo -ne "\e[32m"
 echo $"CL installer for $DISTRO"
-echo $"Version 3.2.0 2015/05/25"
+echo $"Version 3.3.0 2016/11/22"
 echo -ne "\e[0m"
 echo ''
 }
@@ -325,16 +325,22 @@ echo $"File copy done"
 echo ''
 yn $"Install GRUB on MBR (Y/n). No will install to root partition"
 if [[ $ans -eq 0 ]]
-  then grub=hd$gdrv1,$gpart1
-  else grub=hd$gdrv1
+  then grub=$rdrv
+  else grub=sd$gdrv
 fi
+
+# Copy over non-live boot parameters to the installed system (FIX ME)
+#cmdline=$(/live/bin/non-live-cmdline | sed -e 's/\\/\\\\/' -e 's/[|]/\\|/')
+#[ $(uname -m) = x86_64 ] && cmdline="$cmdline"
+#cmdline="quiet $cmdline"
+#sed -r -i "s|^(GRUB_CMDLINE_LINUX_DEFAULT=).*|\1\$$cmdline|" /media/$rdrv/etc/default/grub
 
 #grub2 must set up bind mountpoints
 # mount stuff so grub will behave (so chroot will work)
 mount -o tmpfs --bind /dev/ /media/$rdrv/dev/ 
 mount -o proc --bind /proc/ /media/$rdrv/proc/ 
 mount -o sysfs --bind /sys/ /media/$rdrv/sys/ 
-chroot /media/$rdrv grub-install --recheck --no-floppy --force $grub > /dev/null  2>&1 
+chroot /media/$rdrv grub-install --target=i386-pc --recheck --no-floppy --force /dev/$grub > /dev/null  2>&1 
 chroot /media/$rdrv update-grub $grub > /dev/null  2>&1
 /sbin/make-fstab --install /media/$rdrv > /dev/null  2>&1
 chroot /media/$rdrv update-initramfs -u -t > /dev/null  2>&1

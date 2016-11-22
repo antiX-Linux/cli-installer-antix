@@ -1,3 +1,9 @@
+cli-installer-antix (3.9) unstable; urgency=medium
+
+  * Fixed broken grub installation
+
+ -- anticapitalista <antix@operamail.com>  Tue, 22 Nov 2016 17:16:11 +0200
+
 cli-installer-antix (3.8) unstable; urgency=low
 
   * Remove rc.local.install as it is now in installer
