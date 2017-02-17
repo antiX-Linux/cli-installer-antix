@@ -27,7 +27,7 @@ LIVEUSER=demo
 title() {
 echo -ne "\e[32m"
 echo $"CL installer for $DISTRO"
-echo $"Version 3.3.0 2016/11/22"
+echo $"Version 3.3.1 2017/02/08"
 echo -ne "\e[0m"
 echo ''
 }
@@ -293,8 +293,8 @@ yn $"Are you running antiX-net (y/N)"
 if [[ $ans -eq 1 ]]
   then
 echo ''
-echo $"Time to download grub-pc, locales, keyboard-configuration, console-setup, sysv-rc-conf"
-apt-get update && apt-get -y install grub-pc locales keyboard-configuration console-setup sysv-rc-conf
+echo $"Time to download grub-pc, locales, keyboard-configuration, console-setup, console-data, lsb-release, sysv-rc-conf"
+apt-get update && apt-get -y install grub-pc locales keyboard-configuration console-setup console-data lsb-release sysv-rc-conf
 apt-get -y clean
 fi
 #We are now in $rdrv
