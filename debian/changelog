@@ -1,3 +1,9 @@
+cli-installer-antix (3.12) unstable; urgency=low
+
+  * Improved translations
+
+ -- anticapitalista <antix@operamail.com>  Sun, 02 Apr 2017 19:27:39 +0300
+
 cli-installer-antix (3.11) unstable; urgency=medium
 
   * Added lsb-release to net install packages to be installed
