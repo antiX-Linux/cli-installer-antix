@@ -45,7 +45,7 @@ echo $"antiX-core: hard-disk 0.7GB  RAM 48MB"
 echo ''
 echo $"antiX-net:  hard-disk 0.3GB  RAM 48MB"
 echo ''
-echo $"Make sure you have are connected to "
+echo $"Make sure you are connected to "
 echo ''
 echo $"the net BEFORE running this installer"
 echo ''
@@ -486,6 +486,6 @@ umount -l /media/$rdrv/sys/
 umount -l /media/$rdrv
 if [[ "$hmtp" -ne 0 ]]; then umount -l /dev/$hdrv;fi
 echo ''
-echo $"Installation of $DISTRO finished!"
+echo $"Installation of antiX finished!"
 echo ''
 echo $"Reboot computer without CD to start program. ('reboot')"
