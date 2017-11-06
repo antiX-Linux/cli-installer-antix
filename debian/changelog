@@ -1,3 +1,10 @@
+cli-installer-antix (3.14) unstable; urgency=medium
+
+  * Commented out line 345 so users can install /home on separate partition
+  * Edited new min install sizes
+
+ -- anticapitalista <antix@operamail.com>  Sat, 28 Oct 2017 15:52:58 +0300
+
 cli-installer-antix (3.13) unstable; urgency=medium
 
   * Further improvments to translations

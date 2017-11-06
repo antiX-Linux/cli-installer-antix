@@ -7,7 +7,7 @@ TEXTDOMAINDIR=/usr/share/locale
 TEXTDOMAIN=cli-installer
 
 #Default
-DISTR0=antiX-16
+DISTR0=antiX-17
 LIVEUSER=demo
 
 ##functions
@@ -27,7 +27,7 @@ LIVEUSER=demo
 title() {
 echo -ne "\e[32m"
 echo $"CL installer for $DISTRO"
-echo $"Version 3.3.1 2017/02/08"
+echo $"Version 4 2017/10/28"
 echo -ne "\e[0m"
 echo ''
 }
@@ -37,13 +37,13 @@ echo -ne "\e[36m"
 echo $"Requirements for minimum installation:"
 echo -ne "\e[0m"
 echo ''
-echo $"antiX-full: hard-disk 2.8GB  RAM 64MB"
+echo $"antiX-full: hard-disk 4.0GB  RAM 64MB"
 echo ''
-echo $"antiX-base: hard-disk 1.5GB  RAM 48MB"
+echo $"antiX-base: hard-disk 3.0GB  RAM 48MB"
 echo ''
-echo $"antiX-core: hard-disk 0.7GB  RAM 48MB"
+echo $"antiX-core: hard-disk 1.0GB  RAM 48MB"
 echo ''
-echo $"antiX-net:  hard-disk 0.3GB  RAM 48MB"
+echo $"antiX-net:  hard-disk 0.7GB  RAM 48MB"
 echo ''
 echo $"Make sure you are connected to "
 echo ''
@@ -232,7 +232,7 @@ fi
 # Make sure /live/aufs/dev, /live/aufs/sys, /live/aufs/proc exist when starting script
 mkdir -p /live/aufs/dev /live/aufs/sys /live/aufs/proc
 # Make sure fstab is ok and start swap - (needed for antixsnapshot)
-make-fstab 
+make-fstab
 swapon -a
 # Show requirements
 kernel="-$(uname -r)"
@@ -342,7 +342,7 @@ mount -o proc --bind /proc/ /media/$rdrv/proc/
 mount -o sysfs --bind /sys/ /media/$rdrv/sys/ 
 chroot /media/$rdrv grub-install --target=i386-pc --recheck --no-floppy --force /dev/$grub > /dev/null  2>&1 
 chroot /media/$rdrv update-grub $grub > /dev/null  2>&1
-/sbin/make-fstab --install /media/$rdrv > /dev/null  2>&1
+#/sbin/make-fstab --install /media/$rdrv --mntpnt=/media > /dev/null  2>&1
 chroot /media/$rdrv update-initramfs -u -t > /dev/null  2>&1
 echo $"GRUB installed on ($grub)"
 echo ''
