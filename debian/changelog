@@ -1,3 +1,15 @@
+cli-installer-antix (3.16) unstable; urgency=medium
+
+  * Improved localisation
+
+ -- anticapitalista <antix@operamail.com>  Fri, 02 Mar 2018 17:52:08 +0200
+
+cli-installer-antix (3.15) unstable; urgency=medium
+
+  * Fixed bin/bash error when installing - using adduser rather than useradd
+
+ -- anticapitalista <antix@operamail.com>  Wed, 27 Dec 2017 12:33:28 +0200
+
 cli-installer-antix (3.14) unstable; urgency=medium
 
   * Commented out line 345 so users can install /home on separate partition

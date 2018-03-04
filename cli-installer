@@ -27,7 +27,7 @@ LIVEUSER=demo
 title() {
 echo -ne "\e[32m"
 echo $"CL installer for $DISTRO"
-echo $"Version 4 2017/10/28"
+echo $"Version 4.1 2017/12/27"
 echo -ne "\e[0m"
 echo ''
 }
@@ -425,22 +425,14 @@ do
 read -p $"Type in your default user name? " name
 done
 case $hmtp in
-0)chroot /media/$rdrv useradd -m $name;;
+0)chroot /media/$rdrv adduser $name;;
 1)echo '';echo $"Note: $hdrv must contain a folder named '$name'."
-chroot /media/$rdrv useradd $name;;
-2)chroot /media/$rdrv useradd -m $name;;
+chroot /media/$rdrv adduser $name;;
+2)chroot /media/$rdrv adduser $name;;
 esac
-echo $"Type your Password for $name:"
-setpw $name
 echo ''
 echo $"Type your Password for root:"
 setpw root
-mv etc/passwd etc/passwd.old
-grep -v "$name:" etc/passwd.old >> etc/passwd
-sed -i s/sh/bash/ etc/passwd.old
-grep "$name:" etc/passwd.old >> etc/passwd
-cp etc/group.bak etc/group
-cp etc/gshadow.bak etc/gshadow
 sed -i "s/$LIVEUSER/$name/" etc/group
 sed -i "s/$LIVEUSER/$name/" etc/gshadow
 sed -i "s/$LIVEUSER/$name/" usr/share/slim/themes/antiX/slim-install.conf 2>/dev/null
@@ -454,9 +446,6 @@ fi
 echo ''
 echo $"Cleaning up"
 /usr/sbin/live-to-installed /media/$rdrv
-rm etc/passwd.old
-rm etc/group.bak
-rm etc/gshadow.bak
 mv etc/rc.local etc/rc.local2
 mv etc/X11/xorg.conf etc/X11/xorg.conf.live 2>/dev/null
 cp usr/share/antiX/rc.local.install etc/rc.local
