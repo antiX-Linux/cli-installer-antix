@@ -2,6 +2,7 @@
 # cli-installer for antiX
 # written by Burt Holland
 # heavily edited by anticapitalista
+# btrfs tweaks for small systems added by rob
 
 TEXTDOMAINDIR=/usr/share/locale
 TEXTDOMAIN=cli-installer
@@ -23,27 +24,26 @@ LIVEUSER=demo
 #getfs
 #encrypt
 
-
 title() {
 echo -ne "\e[32m"
 echo $"CL installer for $DISTRO"
-echo $"Version 4.1 2017/12/27"
+echo $"Version 4.2 2018/04/24"
 echo -ne "\e[0m"
 echo ''
 }
 
 header() {
 echo -ne "\e[36m"
-echo $"Requirements for minimum installation:"
+echo $"Requirements for minimum* installation:"
 echo -ne "\e[0m"
 echo ''
-echo $"antiX-full: hard-disk 4.0GB  RAM 64MB"
+echo $"antiX-full: hard-disk 4.0GB*  RAM 64MB"
 echo ''
-echo $"antiX-base: hard-disk 3.0GB  RAM 48MB"
+echo $"antiX-base: hard-disk 3.0GB*  RAM 48MB"
 echo ''
-echo $"antiX-core: hard-disk 1.0GB  RAM 48MB"
+echo $"antiX-core: hard-disk 1.0GB*  RAM 48MB"
 echo ''
-echo $"antiX-net:  hard-disk 0.7GB  RAM 48MB"
+echo $"antiX-net:  hard-disk 0.7GB*  RAM 48MB"
 echo ''
 echo $"Make sure you are connected to "
 echo ''
@@ -143,27 +143,35 @@ echo "
 4)jfs 
 5)xfs 
 6)btrfs 
-7)reiserfs"
+7)btrfs with zlib compression
+8)btrfs with zlib compression
+  optimized for small drives
+9)reiserfs"
 echo ''
 ans=1
 while [[ $ans -ne 0 ]]
 do
-read -p $"Enter your choice 1-7: " fs
+read -p $"Enter your choice 1-9: " fs
 if [[ "$fs" == "" ]]
   then fs=ext4
 fi
 ans=0
 echo $"You have chosen $fs for $1"
 echo ''
+mntopt="defaults,relatime"
 case $fs in
 1) mkfs.ext2 /dev/$1 > /live/aufs/dev/null 2>&1;;
 2) mkfs.ext3 /dev/$1 > /live/aufs/dev/null 2>&1;;
 3) mkfs.ext4 /dev/$1 > /live/aufs/dev/null 2>&1;;
 4) mkfs.jfs -q /dev/$1 > /live/aufs/dev/null 2>&1;;
 5) mkfs.xfs -f /dev/$1 > /live/aufs/dev/null 2>&1;;
-6) mkfs.btrfs /dev/$1 > /live/aufs/dev/null 2>&1;;
-7) mkreiserfs -q /dev/$1 > /live/aufs/dev/null 2>&1;;
-8) mkfs.reiser4 -f -y /dev/$1 > /live/aufs/dev/null 2>&1 
+6) mkfs.btrfs -f /dev/$1 > /live/aufs/dev/null 2>&1;;
+7) mntopt="defaults,relatime,compress-force=zlib"
+mkfs.btrfs /dev/$1 > /live/aufs/dev/null 2>&1;;
+8) mntopt="defaults,relatime,compress-force=zlib"
+mkfs.btrfs -f -M -O skinny-metadata /dev/$1 > /live/aufs/dev/null 2>&1;;
+9) mkreiserfs -q /dev/$1 > /live/aufs/dev/null 2>&1;;
+10) mkfs.reiser4 -f -y /dev/$1 > /live/aufs/dev/null 2>&1 
 
 echo $"Ignore any 'barrier' lines";;
 *) echo $"$fs invalid. Retry:"; ans=1
@@ -257,7 +265,7 @@ if [[ $ans -eq 1 ]]
    echo $"This may take some time. Please wait...."
 fi
 mkdir /media/$rdrv > /live/aufs/dev/null 2>&1
-mount /dev/$rdrv /media/$rdrv > /live/aufs/dev/null 2>&1
+mount -o $mntopt /dev/$rdrv /media/$rdrv > /live/aufs/dev/null 2>&1
 rm -r /media/$rdrv/* > /live/aufs/dev/null 2>&1
 echo ''
 # Set up separate /home and mount on /media/$hdrv
@@ -306,7 +314,7 @@ cp -a /live/aufs/* .
 
 #set up fstab
 echo '# Pluggable devices are handled by uDev, they are not in fstab' > etc/fstab.new
-echo "/dev/$rdrv / $fs1 defaults,relatime 0 1"  >>  etc/fstab.new
+echo "/dev/$rdrv / $fs1 $mntopt 0 1"  >>  etc/fstab.new
 grep swap etc/fstab >> etc/fstab.new
 if [[ "$hmtp" -gt 0 ]]
   then
