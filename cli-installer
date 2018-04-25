@@ -433,10 +433,10 @@ do
 read -p $"Type in your default user name? " name
 done
 case $hmtp in
-0)chroot /media/$rdrv adduser $name;;
+0)chroot /media/$rdrv adduser --shell=/bin/bash $name;;
 1)echo '';echo $"Note: $hdrv must contain a folder named '$name'."
-chroot /media/$rdrv adduser $name;;
-2)chroot /media/$rdrv adduser $name;;
+chroot /media/$rdrv adduser --shell=/bin/bash $name;;
+2)chroot /media/$rdrv adduser --shell=/bin/bash $name;;
 esac
 echo ''
 echo $"Type your Password for root:"
