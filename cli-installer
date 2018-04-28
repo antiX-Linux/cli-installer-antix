@@ -91,35 +91,8 @@ getroot() {
 ans=1
 while [[ "$ans" -ne 0 ]]
 do
-read -p $"Root partition (hda1, sda2, etc): " rdrv
-if [[ "$rdrv" > "hd" && "$rdrv" < "he" ]]; then rpre=hd
-  elif [[ "$rdrv" > "sd" && "$rdrv" < "se" ]]; then rpre=sd
-  else rpre=x;
-fi
-if [[ !("$rpre" = "x") ]]
-  then 
-  gdrv1=-1
-  for var in "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k"
-  do
- if [[ "$rdrv" > "$rpre$var" ]]
-  then
-  gdrv1=$((gdrv1+1))
-  gdrv="$var"
- fi
- done
- gpart=-1
- var1=-1
- for var in "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19"
- do
- var1=$((var1+1))
- if [[ "$rdrv" == "$rpre$gdrv$var" ]]
-  then
-  gpart=$var
-  gpart1=$var1
- fi
- done
-fi
-if [[ "$rpre" = "x" || "$gdrv1" -lt 0 || "$gdrv1" -gt 18 || "$gpart1" -lt 0 ]]
+read -p $"Root partition (hda1, sda2, nvme0n1p1 etc): " rdrv
+if [[ ! "$rdrv" =~ [sh]d[a-k][1-9] ]] && [[ ! "$rdrv" =~ nvme[0-9]n[0-9]p[0-9] ]]
   then echo $"$rdrv invalid. Retry"
   else ans=0
 fi
