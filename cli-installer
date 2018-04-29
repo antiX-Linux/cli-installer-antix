@@ -27,7 +27,7 @@ LIVEUSER=demo
 title() {
 echo -ne "\e[32m"
 echo $"CL installer for $DISTRO"
-echo $"Version 4.2 2018/04/24"
+echo $"Version 4.2 2018/04/29"
 echo -ne "\e[0m"
 echo ''
 }
@@ -220,6 +220,10 @@ kernel="-$(uname -r)"
 echo ''
 header
 echo ''
+echo $"====Disk and partition Information===="
+partition-info all
+echo ''
+echo ''
 # Repartition or not and set file up system via cfdisk
 yn $"Do you want to repartition the disk (y/N)"
 if [[ $ans -eq 1 ]]
@@ -296,8 +300,8 @@ if [[ "$hmtp" -gt 0 ]]
   else
   arg1='xxxx'
 fi
-echo '# Dynamic entries below' >> etc/fstab.new
-grep -v '#' etc/fstab|grep -v swap|grep -v proc|grep -v devpts|grep -v $rdrv|grep -v $arg1 >> etc/fstab.new
+#echo '# Dynamic entries below' >> etc/fstab.new
+#grep -v '#' etc/fstab|grep -v swap|grep -v proc|grep -v devpts|grep -v $rdrv|grep -v $arg1 >> etc/fstab.new
 rm etc/fstab
 mv etc/fstab.new etc/fstab
 cp etc/group etc/group.bak
@@ -324,6 +328,7 @@ mount -o sysfs --bind /sys/ /media/$rdrv/sys/
 chroot /media/$rdrv grub-install --target=i386-pc --recheck --no-floppy --force /dev/$grub > /dev/null  2>&1 
 chroot /media/$rdrv update-grub $grub > /dev/null  2>&1
 #/sbin/make-fstab --install /media/$rdrv --mntpnt=/media > /dev/null  2>&1
+chroot /media/$rdrv dev2uuid_fstab > /dev/null  2>&1
 chroot /media/$rdrv update-initramfs -u -t > /dev/null  2>&1
 echo $"GRUB installed on ($grub)"
 echo ''
@@ -385,9 +390,9 @@ yn $"Is this a remastered/snapshot install (y/N)"
 if [[ $ans -eq 1 ]]
   then
   # Write code to get buildfstab -r to start on first boot via rc.local (if user wants it?)
-  mv etc/rc.local etc/rc.local2
+  #mv etc/rc.local etc/rc.local2
   mv etc/udev/rules.d/90-fstab-automount.rules etc/udev/rules.d/90-fstab-automount.rules.live
-  cp usr/share/antiX/rc.local.install etc/rc.local
+  \cp usr/share/antiX/rc.local.install etc/rc.local
   # (also)Remove live system if it exists
   chroot /media/$rdrv dpkg -r live-init-antix 2>/dev/null
   rm /media/$hdrv/$LIVEUSER 
@@ -427,9 +432,9 @@ fi
 echo ''
 echo $"Cleaning up"
 /usr/sbin/live-to-installed /media/$rdrv
-mv etc/rc.local etc/rc.local2
+#mv etc/rc.local etc/rc.local2
 mv etc/X11/xorg.conf etc/X11/xorg.conf.live 2>/dev/null
-cp usr/share/antiX/rc.local.install etc/rc.local
+\cp usr/share/antiX/rc.local.install etc/rc.local
 cp usr/share/slim/themes/antiX/slim-install.conf etc/slim.conf 2>/dev/null
 chroot /media/$rdrv dpkg -r live-init-antix 2>/dev/null
 cp -r etc/skel/.[a-zA-Z]* home/*/ 2>/dev/null
